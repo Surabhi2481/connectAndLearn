@@ -19,7 +19,9 @@ public class User extends AbstractEntity{
 	private String phoneNumber;
 	private String email;
 	private String password;
-	private Set<Role> roles;
+	
+	
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -68,17 +70,12 @@ public class User extends AbstractEntity{
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Set<Role> getRoles() {
-		return roles;
-	}
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
+
 	@Override
 	public String toString() {
 		return "User [firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", gender="
 				+ gender + ", country=" + country + ", phoneNumber=" + phoneNumber + ", email=" + email + ", password="
-				+ password + ", roles=" + roles + "]";
+				+ password + "]";
 	}
 	
 	

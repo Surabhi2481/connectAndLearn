@@ -1,7 +1,6 @@
 package com.surabhi.connectAndLearn.entities;
 
 import java.util.Date;
-import java.util.Set;
 
 import javax.persistence.Entity;
 

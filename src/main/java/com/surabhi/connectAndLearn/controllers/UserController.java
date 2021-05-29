@@ -2,6 +2,8 @@ package com.surabhi.connectAndLearn.controllers;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -14,6 +16,7 @@ import com.surabhi.connectAndLearn.entities.User;
 import com.surabhi.connectAndLearn.repos.EnrollmentRepository;
 import com.surabhi.connectAndLearn.repos.SkillRepository;
 import com.surabhi.connectAndLearn.repos.UserRepository;
+import com.surabhi.connectAndLearn.services.ProfileService;
 
 @Controller
 public class UserController {
@@ -26,6 +29,11 @@ public class UserController {
 	
 	@Autowired
 	EnrollmentRepository enrollmentRepository;
+	
+	@Autowired
+	ProfileService profileService;
+
+	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 	
 	private User user;
 	
@@ -71,6 +79,16 @@ public class UserController {
 	public String showEditProfile(ModelMap modelMap) {
 		modelMap.addAttribute("userDetails", user);
 		return "profile/editProfile";
+	}	
+
+	@RequestMapping(value = "/updateProfile", method = RequestMethod.POST)
+	public String updateProfile(@ModelAttribute("user") User user1, ModelMap modelMap) {
+		LOGGER.info(user1.toString());
+		user = userRepository.findById(user1.getId()).get();
+		User updateUser = profileService.updateProfile(user, user1);
+		modelMap.addAttribute("userDetails", updateUser);
+
+		return "profile/showProfile";
 	}
 	
 

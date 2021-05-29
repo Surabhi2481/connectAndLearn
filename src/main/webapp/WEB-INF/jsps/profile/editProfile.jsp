@@ -10,10 +10,10 @@
 <h2>Edit User Details</h2><hr />
 <form action="updateProfile" method="post">
 <pre>
-User ID: <input type="text" name="name" value="${userDetails.id}" READONLY />
-First Name: <input type="text" name="name" value="${userDetails.firstName}"/>
-Last Name: <input type="text" name="name" value="${userDetails.lastName}"/>
-Date of Birth: <input type="text" name="name" value="${userDetails.dateOfBirth}"/>
+User ID: <input type="text" name="id" value="${userDetails.id}" READONLY />
+First Name: <input type="text" name="firstName" value="${userDetails.firstName}"/>
+Last Name: <input type="text" name="lastName" value="${userDetails.lastName}"/>
+Date of Birth: <input type="date" name="dateOfBirth" value="${userDetails.dateOfBirth}"/>
 Gender:	
 	Male<input type="radio" name="gender" value="male" ${userDetails.gender=='male' ? 'checked' : ''} />  Female <input type="radio" name="gender" value="female" ${userDetails.gender=='female' ? 'checked' : ''} /> Not Specified <input type="radio" name="gender" value="not_specified" ${userDetails.gender=='not_specified' ? 'checked' : ''}/>
 Country: <input type="text" name="country" value="${userDetails.country}"/>

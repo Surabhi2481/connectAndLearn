@@ -61,7 +61,17 @@ public class UserController {
 		return "login/login";
 	}
 	
-	
+	@RequestMapping("/showProfile")
+	public String showInstructorProfile(ModelMap modelMap) {
+		modelMap.addAttribute("userDetails", user);
+		return "profile/showProfile";
+	}
+
+	@RequestMapping("/showEditProfile")
+	public String showEditProfile(ModelMap modelMap) {
+		modelMap.addAttribute("userDetails", user);
+		return "profile/editProfile";
+	}
 	
 
 }

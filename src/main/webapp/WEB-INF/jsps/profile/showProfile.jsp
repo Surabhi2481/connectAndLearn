@@ -13,7 +13,7 @@
 User Id: ${userDetails.id}
 First Name: ${userDetails.firstName}
 Last Name: ${userDetails.lastName}
-Date of birth: <fmt:formatDate type = "date" value = "${userDetails.dateOfBirth}" />
+Date of birth: <fmt:formatDate type ="date" value ="${userDetails.dateOfBirth}" />
 Gender: ${userDetails.gender}
 Country: ${userDetails.country}
 Phone Number: ${userDetails.phoneNumber}

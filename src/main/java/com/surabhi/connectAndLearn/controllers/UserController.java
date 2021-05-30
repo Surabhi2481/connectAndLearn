@@ -91,5 +91,15 @@ public class UserController {
 		return "profile/showProfile";
 	}
 	
+	@RequestMapping("/showDeleteProfile")
+	public String showDeleteProfile() {
+		return "profile/deleteProfile";
+	}
+
+	@RequestMapping("/deleteProfile")
+	public String deleteProfile() {
+		userRepository.deleteById(user.getId());
+		return "profile/deletedSuccessfully";
+	}
 
 }

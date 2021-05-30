@@ -3,6 +3,7 @@ package com.surabhi.connectAndLearn.repos;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
 import com.surabhi.connectAndLearn.entities.Skill;
@@ -13,5 +14,9 @@ public interface SkillRepository extends JpaRepository<Skill, Long> {
 	List<String> fetchTrendingSkills();
 
 	List<Skill> findAllByName(String skillName);
+	
+	@Modifying
+    @Query( value = "select s.name from skill s where s.name LIKE %:term%", nativeQuery = true)
+    List<String> getSkillName(String term);
 
 }

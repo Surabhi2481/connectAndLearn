@@ -24,4 +24,13 @@ public class ProfileServiceImpl implements ProfileService {
 		return updatedUser;
 	}
 
+	@Override
+	public User fetchUser() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	
+	
+
 }

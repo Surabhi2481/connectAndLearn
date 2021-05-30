@@ -6,4 +6,6 @@ public interface ProfileService {
 
 	User updateProfile(User user, User newUser);
 
+	User fetchUser();
+
 }

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Hobby Finder</title>
+<title>Skill Finder</title>
 </head>
 <body>
 <table>
@@ -28,7 +28,7 @@
     	<td>${skill.fee}</td>
     	<td>${skill.rating}</td>
     	<td>${skill.studentsSoFar}</td>
-    	<td><a href="enroll?skillId=${skill.id}">Enroll</a></td>
+    	<td><a href="showEnroll?skillId=${skill.id}">Enroll</a></td>
     </tr>
     </c:forEach>
 </table>

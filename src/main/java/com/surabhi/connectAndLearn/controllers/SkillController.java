@@ -12,12 +12,17 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.surabhi.connectAndLearn.entities.Skill;
 import com.surabhi.connectAndLearn.repos.SkillRepository;
+import com.surabhi.connectAndLearn.services.ProfileService;
 
 @Controller
 public class SkillController {
 	
 	@Autowired
 	SkillRepository skillRepository;
+	
+	@Autowired
+	ProfileService profileService;
+	
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
@@ -29,5 +34,7 @@ public class SkillController {
 		modelMap.addAttribute("allSkills", allSkills);
 		return "skill/skillDetails";
 	}
+	
+
 
 }

@@ -49,7 +49,7 @@ public class SkillController {
 	
 	@RequestMapping("/showLearn")
 	public String showLearn() {
-		return "skill/searchHobby";
+		return "skill/searchSkill";
 	}
 
 	@RequestMapping(value = "/autocomplete")

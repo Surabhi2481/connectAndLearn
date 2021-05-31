@@ -8,6 +8,8 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.surabhi.connectAndLearn.entities.Skill;
+import com.surabhi.connectAndLearn.entities.User;
 import com.surabhi.connectAndLearn.repos.EnrollmentRepository;
 import com.surabhi.connectAndLearn.repos.SkillRepository;
 import com.surabhi.connectAndLearn.repos.UserRepository;
@@ -42,5 +44,18 @@ public class SkillServieImpl implements SkillService {
 		return listOfSkills;
 	}
 	
+	@Override
+	public Skill addCourse(String name, String description, Float fee, Long instructorId) {
+		User instructor = userRepository.findById(instructorId).get();
+		Skill skill = new Skill();
+		skill.setName(name);
+		skill.setDescription(description);
+		skill.setInstructorId(instructor.getId());
+		skill.setInstructorName(instructor.getFirstName() + " " + instructor.getLastName());
+		skill.setFee(fee);
+		skill.setRating(0.0f);
+		skill.setStudentsSoFar(0L);
+		return skillRepository.save(skill);
+	}
 
 }

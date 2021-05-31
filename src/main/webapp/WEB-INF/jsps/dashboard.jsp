@@ -62,7 +62,7 @@ li a:hover {
 </c:choose>
 <a href="showLearn?userId=${userId}">Learn a new skill !</a>
 <a href="showTeach?userId=${userId}">Teach a new skill |</a>
-<a href="showTrainees"> My Trainees |</a>
-<a href="showEnrollments"> My Enrollments</a>
+<a href="showTrainees?userId=${userId}"> My Trainees |</a>
+<a href="showEnrollments?userId=${userId}"> My Enrollments</a>
 </body>
 </html> 

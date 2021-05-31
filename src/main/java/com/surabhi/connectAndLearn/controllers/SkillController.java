@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.surabhi.connectAndLearn.entities.Skill;
-import com.surabhi.connectAndLearn.entities.User;
 import com.surabhi.connectAndLearn.repos.SkillRepository;
 import com.surabhi.connectAndLearn.repos.UserRepository;
 import com.surabhi.connectAndLearn.services.ProfileService;

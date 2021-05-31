@@ -5,7 +5,6 @@ public class Trainee {
 	private Long enrollmentId;
 	private Long skillId;
 	private String skillName;
-	private Long traineeId;
 	private String traineeName;
 	private String traineeEmail;
 	private String traineePhoneNumber;
@@ -67,13 +66,6 @@ public class Trainee {
 		this.enrollmentId = enrollmentId;
 	}
 
-	public Long getTraineeId() {
-		return traineeId;
-	}
-
-	public void setTraineeId(Long traineeId) {
-		this.traineeId = traineeId;
-	}
 
 
 }

@@ -8,4 +8,6 @@ public interface TrainingService {
 
 	List<Trainee> getTrainees(Long userId);
 
+	public void markAsTrained(Long enrollmentId);
+
 }

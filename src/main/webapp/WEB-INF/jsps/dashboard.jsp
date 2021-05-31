@@ -63,6 +63,6 @@ li a:hover {
 <a href="showLearn?userId=${userId}">Learn a new skill !</a>
 <a href="showTeach?userId=${userId}">Teach a new skill |</a>
 <a href="showTrainees?userId=${userId}"> My Trainees |</a>
-<a href="showEnrollments?userId=${userId}"> My Enrollments</a>
+<a href="showEnroll?userId=${userId}"> My Enrollments</a>
 </body>
 </html> 

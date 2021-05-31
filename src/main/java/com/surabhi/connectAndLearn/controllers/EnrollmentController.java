@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.surabhi.connectAndLearn.dto.Trainee;
+import com.surabhi.connectAndLearn.entities.Enrollment;
 import com.surabhi.connectAndLearn.entities.Skill;
+import com.surabhi.connectAndLearn.repos.EnrollmentRepository;
 import com.surabhi.connectAndLearn.repos.SkillRepository;
 import com.surabhi.connectAndLearn.services.EnrollService;
 import com.surabhi.connectAndLearn.services.TrainingService;
@@ -22,6 +24,9 @@ public class EnrollmentController {
 
 	@Autowired
 	SkillRepository skillRepository;
+	
+	@Autowired
+	EnrollmentRepository enrollmentRepository;
 	
 	@Autowired
 	EnrollService enrollService;
@@ -73,5 +78,12 @@ public class EnrollmentController {
 		List<Trainee> trainees = trainingService.getTrainees(instructorId);
 		modelMap.addAttribute("trainees", trainees);
 		return "enrollment/showTrainees";
+	}
+	
+	@RequestMapping("/showEnrollments")
+	public String showEnrollments(@RequestParam("userId") Long userId, ModelMap modelMap) {
+		List<Enrollment> enrollments = enrollmentRepository.findAllByUserId(userId);
+		modelMap.addAttribute("enrollments", enrollments);
+		return "enrollment/enrollments";
 	}
 }

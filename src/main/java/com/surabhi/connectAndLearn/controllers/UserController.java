@@ -17,6 +17,7 @@ import com.surabhi.connectAndLearn.repos.EnrollmentRepository;
 import com.surabhi.connectAndLearn.repos.SkillRepository;
 import com.surabhi.connectAndLearn.repos.UserRepository;
 import com.surabhi.connectAndLearn.services.ProfileService;
+import com.surabhi.connectAndLearn.services.SkillService;
 
 @Controller
 public class UserController {
@@ -32,6 +33,9 @@ public class UserController {
 	
 	@Autowired
 	ProfileService profileService;
+	
+	@Autowired
+	SkillService skillService;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 	
@@ -60,7 +64,7 @@ public class UserController {
 		if (password.equals(user.getPassword())) {
 			List<String> trendingSkills = skillRepository.fetchTrendingSkills();
 			modelMap.addAttribute("trendingSkills", trendingSkills);
-			List<String> mySkills = enrollmentRepository.fetchMySkills(user.getId());
+			List<String> mySkills = skillService.fetchMySkills(user.getId());
 			modelMap.addAttribute("mySkills", mySkills);
 			modelMap.addAttribute("userId", user.getId());
 			return "dashboard";
@@ -107,7 +111,7 @@ public class UserController {
 	public String showDashboard(ModelMap modelMap) {
 		List<String> trendingSkills = skillRepository.fetchTrendingSkills();
 		modelMap.addAttribute("trendingSkills", trendingSkills);
-		List<String> mySkills = enrollmentRepository.fetchMySkills(user.getId());
+		List<String> mySkills = skillService.fetchMySkills(user.getId());
 		modelMap.addAttribute("mySkills", mySkills);
 		modelMap.addAttribute("userId", user.getId());
 		return "dashboard";

@@ -6,4 +6,6 @@ public interface SkillService {
 
 	List<String> getSkillName(String term);
 
+	List<String> fetchMySkills(Long id);
+
 }

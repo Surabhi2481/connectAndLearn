@@ -31,10 +31,11 @@ public class SkillController {
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
 	@RequestMapping("/showSkillDetails")
-	public String showSkillDetails(@RequestParam("skillName") String skillName,@RequestParam("userId") Long userId,  ModelMap modelMap) {
+	public String showSkillDetails(@RequestParam("skillName") String skillName, @RequestParam("userId") Long userId,
+			ModelMap modelMap) {
 		List<Skill> allSkills = skillRepository.findAllByName(skillName);
 		for(Skill s : allSkills)
-		LOGGER.info(s.toString());
+			LOGGER.info(s.toString());
 		modelMap.addAttribute("allSkills", allSkills);
 		modelMap.addAttribute("userId", userId);
 		return "skill/skillDetails";
@@ -45,11 +46,11 @@ public class SkillController {
 		return "skill/searchHobby";
 	}
 
-	 @RequestMapping(value = "/autocomplete")
-	    @ResponseBody
-	    public List<String> autoName(@RequestParam(value = "term", required = false, defaultValue = "")String term){
-	        List<String> skillNames = skillService.getSkillName(term);
-	        return skillNames;
-	    }
+	@RequestMapping(value = "/autocomplete")
+	@ResponseBody
+	public List<String> autoName(@RequestParam(value = "term", required = false, defaultValue = "") String term) {
+		List<String> skillNames = skillService.getSkillName(term);
+		return skillNames;
+	}
 
 }

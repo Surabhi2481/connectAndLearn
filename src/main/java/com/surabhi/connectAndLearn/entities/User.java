@@ -1,8 +1,12 @@
 package com.surabhi.connectAndLearn.entities;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.Entity;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -18,7 +22,9 @@ public class User extends AbstractEntity{
 	private String phoneNumber;
 	private String email;
 	private String password;
-	
+	@ManyToMany
+	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
+	private Set<Role> roles;
 	
 	
 	public String getFirstName() {
@@ -70,12 +76,21 @@ public class User extends AbstractEntity{
 		this.password = password;
 	}
 
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
+	}
+
 	@Override
 	public String toString() {
 		return "User [firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + ", gender="
 				+ gender + ", country=" + country + ", phoneNumber=" + phoneNumber + ", email=" + email + ", password="
 				+ password + "]";
 	}
+	
 	
 	
 }

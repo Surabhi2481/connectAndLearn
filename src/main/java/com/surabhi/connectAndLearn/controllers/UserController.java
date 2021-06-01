@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +18,7 @@ import com.surabhi.connectAndLearn.repos.EnrollmentRepository;
 import com.surabhi.connectAndLearn.repos.SkillRepository;
 import com.surabhi.connectAndLearn.repos.UserRepository;
 import com.surabhi.connectAndLearn.services.ProfileService;
+import com.surabhi.connectAndLearn.services.SecurityService;
 import com.surabhi.connectAndLearn.services.SkillService;
 
 @Controller
@@ -36,6 +38,12 @@ public class UserController {
 	
 	@Autowired
 	SkillService skillService;
+	
+	@Autowired
+	private BCryptPasswordEncoder encoder;
+
+	@Autowired
+	private SecurityService securityService;
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 	
@@ -48,7 +56,9 @@ public class UserController {
 
 	@RequestMapping(value = "/registerUser", method = RequestMethod.POST)
 	public String register(@ModelAttribute("user") User user) {
+		user.setPassword(encoder.encode(user.getPassword()));
 		userRepository.save(user);
+		securityService.assignRoleToUser(user);
 		return "login/login";
 	}
 	
@@ -60,8 +70,10 @@ public class UserController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(@RequestParam("email") String email, @RequestParam("password") String password,
 			ModelMap modelMap) {
-		user = userRepository.findByEmail(email);
-		if (password.equals(user.getPassword())) {
+			boolean loginResponse = securityService.login(email, password);
+			if (loginResponse) {
+				User user = userRepository.findByEmail(email);
+				this.user = user;
 			List<String> trendingSkills = skillRepository.fetchTrendingSkills();
 			modelMap.addAttribute("trendingSkills", trendingSkills);
 			List<String> mySkills = skillService.fetchMySkills(user.getId());

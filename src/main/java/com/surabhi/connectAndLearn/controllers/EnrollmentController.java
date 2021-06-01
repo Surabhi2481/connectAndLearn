@@ -17,6 +17,7 @@ import com.surabhi.connectAndLearn.entities.Skill;
 import com.surabhi.connectAndLearn.entities.User;
 import com.surabhi.connectAndLearn.repos.EnrollmentRepository;
 import com.surabhi.connectAndLearn.repos.SkillRepository;
+import com.surabhi.connectAndLearn.repos.UserRepository;
 import com.surabhi.connectAndLearn.services.EnrollService;
 import com.surabhi.connectAndLearn.services.ProfileService;
 import com.surabhi.connectAndLearn.services.TrainingService;
@@ -39,12 +40,14 @@ public class EnrollmentController {
 	@Autowired
 	ProfileService profileService;
 	
-	Long userId;
-	
+	@Autowired
+	UserRepository userRepository;
+
 	private static final Logger LOGGER = LoggerFactory.getLogger(EnrollmentController.class);
 
 	@RequestMapping("/showEnroll")
-	public String showEnroll(@RequestParam("skillId") Long skillId,@RequestParam("userId") Long userId, ModelMap modelMap) {
+	public String showEnroll(@RequestParam("skillId") Long skillId, ModelMap modelMap) {
+		User user = profileService.fetchUser();
 		Skill skill = skillRepository.findById(skillId).get();
 		modelMap.addAttribute("skill", skill);
 		return "enrollment/showEnroll";
@@ -70,8 +73,9 @@ public class EnrollmentController {
 	}
 	
 	@RequestMapping("/showTrainees")
-	public String showTrainees(@RequestParam("userId") Long userId, ModelMap modelMap) {
-		List<Trainee> trainees = trainingService.getTrainees(userId);
+	public String showTrainees(ModelMap modelMap) {
+		User user = profileService.fetchUser();
+		List<Trainee> trainees = trainingService.getTrainees(user.getId());
 		modelMap.addAttribute("trainees", trainees);
 		return "enrollment/showTrainees";
 	}

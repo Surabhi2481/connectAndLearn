@@ -10,6 +10,11 @@
 </head>
 <body>
 <h2>My Trainees:-</h2><hr />
+<c:choose>
+  <c:when test="${trainees.size() == 0}">
+  	<p>You don't have any trainees yet.</p>
+ </c:when>
+ <c:otherwise>
 <table>
 <tr>
 	<th>Skill ID</th>
@@ -32,5 +37,7 @@
     </tr>
     </c:forEach>
 </table>
+</c:otherwise>
+</c:choose>
 </body>
 </html> 

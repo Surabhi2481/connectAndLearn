@@ -46,8 +46,8 @@ public class SkillController {
 		return "skill/skillDetails";
 	}
 	
-	@RequestMapping("/showLearn")
-	public String showLearn() {
+	public String showLearn(@RequestParam("userId") Long userId, ModelMap modelMap) {
+		modelMap.addAttribute("userId", userId);
 		return "skill/searchSkill";
 	}
 

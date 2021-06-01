@@ -46,7 +46,7 @@ public class UserController {
 		return "login/register";
 	}
 
-	@RequestMapping(value = "registerUser", method = RequestMethod.POST)
+	@RequestMapping(value = "/registerUser", method = RequestMethod.POST)
 	public String register(@ModelAttribute("user") User user) {
 		userRepository.save(user);
 		return "login/login";
@@ -115,6 +115,11 @@ public class UserController {
 		modelMap.addAttribute("mySkills", mySkills);
 		modelMap.addAttribute("userId", user.getId());
 		return "dashboard";
+	}
+	
+	@RequestMapping("/logout")
+	public String logout() {
+		return "login/login";
 	}
 
 }

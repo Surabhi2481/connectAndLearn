@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.surabhi.connectAndLearn.dto.Trainee;
 import com.surabhi.connectAndLearn.entities.Enrollment;
 import com.surabhi.connectAndLearn.entities.Skill;
+import com.surabhi.connectAndLearn.entities.User;
 import com.surabhi.connectAndLearn.repos.EnrollmentRepository;
 import com.surabhi.connectAndLearn.repos.SkillRepository;
 import com.surabhi.connectAndLearn.services.EnrollService;
+import com.surabhi.connectAndLearn.services.ProfileService;
 import com.surabhi.connectAndLearn.services.TrainingService;
 
 @Controller
@@ -33,6 +35,9 @@ public class EnrollmentController {
 	
 	@Autowired
 	TrainingService trainingService;
+	
+	@Autowired
+	ProfileService profileService;
 	
 	Long userId;
 	
@@ -54,7 +59,8 @@ public class EnrollmentController {
 
 	@RequestMapping("/enroll")
 	public String enroll(@RequestParam("skillId") Long skillId, @RequestParam("paymentGateway") String paymentGateway, ModelMap modelMap) {
-		boolean isEnrolled = enrollService.enroll(paymentGateway, skillId, userId);
+		User user = profileService.fetchUser();
+		boolean isEnrolled = enrollService.enroll(paymentGateway, skillId, user.getId());
 		if(isEnrolled) {
 			return "enrollment/enrollmentSuccessful";
 		}

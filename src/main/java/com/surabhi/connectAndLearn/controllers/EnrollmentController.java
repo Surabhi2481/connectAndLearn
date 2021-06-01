@@ -86,4 +86,11 @@ public class EnrollmentController {
 		modelMap.addAttribute("enrollments", enrollments);
 		return "enrollment/enrollments";
 	}
+	
+	@RequestMapping("/contactInstructor")
+	public String contactInstructor(@RequestParam("enrollmentId") Long enrollmentId, ModelMap modelMap) {
+		String instructorContact = enrollService.fetchInstructorContact(enrollmentId);
+		modelMap.addAttribute("instructorContactDetails", instructorContact);
+		return "enrollment/contactInstructor";
+	}
 }

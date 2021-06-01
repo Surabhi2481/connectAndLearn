@@ -9,8 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.surabhi.connectAndLearn.entities.Enrollment;
 import com.surabhi.connectAndLearn.entities.Skill;
+import com.surabhi.connectAndLearn.entities.User;
 import com.surabhi.connectAndLearn.repos.EnrollmentRepository;
 import com.surabhi.connectAndLearn.repos.SkillRepository;
+import com.surabhi.connectAndLearn.repos.UserRepository;
 import com.surabhi.connectAndLearn.util.PaymentUtility;
 
 @Service
@@ -21,6 +23,9 @@ public class EnrollServiceImpl implements EnrollService {
 
 	@Autowired
 	EnrollmentRepository enrollmentRepository;
+	
+	@Autowired
+	UserRepository userRepository;
 
 	@Autowired
 	PaymentUtility paymentUtility;
@@ -52,6 +57,15 @@ public class EnrollServiceImpl implements EnrollService {
 	public Long getInstructorId(Long enrollmentId) {
 		Enrollment enrollment = enrollmentRepository.findById(enrollmentId).get();
 		return enrollment.getInstructorId();
+	}
+
+	@Override
+	public String fetchInstructorContact(Long enrollmentId) {
+		Enrollment enrollment = enrollmentRepository.findById(enrollmentId).get();
+		Long instructorId = enrollment.getInstructorId();
+		User instructor = userRepository.findById(instructorId).get();
+		String instructorEmail = instructor.getEmail();
+		return instructorEmail;
 	}
 
 }

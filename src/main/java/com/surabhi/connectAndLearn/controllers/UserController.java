@@ -121,7 +121,6 @@ public class UserController {
 		modelMap.addAttribute("trendingSkills", trendingSkills);
 		List<String> mySkills = skillService.fetchMySkills(user.getId());
 		modelMap.addAttribute("mySkills", mySkills);
-		modelMap.addAttribute("userId", user.getId());
 		return "dashboard";
 	}
 	

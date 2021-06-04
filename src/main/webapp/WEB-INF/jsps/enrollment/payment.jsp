@@ -63,12 +63,12 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="showDashboard">Learn-A-Hobby</a>
+      <a class="navbar-brand" href="showDashboard">Connect-And-Learn</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
 		<li><a href="showProfile">My Profile</a></li>
-        <li><a href="logout_wya">Logout</a></li>
+        <li><a href="performLogout">Logout</a></li>
       </ul>
     </div>
   </div>

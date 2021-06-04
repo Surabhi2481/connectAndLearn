@@ -51,7 +51,25 @@
 <title>Enrollment Successful</title>
 </head>
 <body>
-<h2>Enroll Successful!</h2>
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>                        
+      </button>
+      <a class="navbar-brand" href="showDashboard">Connect-And-Learn</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav navbar-right">
+		<li><a href="showProfile">My Profile</a></li>
+        <li><a href="performLogout">Logout</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+<h2 class="successmessage">Enrollment Successful</h2>
 <a href="showDashboard">back to home</a>
 </body>
 </html>

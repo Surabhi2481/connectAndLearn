@@ -58,7 +58,7 @@ public class UserController {
 		user.setPassword(encoder.encode(user.getPassword()));
 		userRepository.save(user);
 		securityService.assignRoleToUser(user);
-		return "login/login";
+		return "redirect:/showLogin";
 	}
 	
 	@RequestMapping("/showLogin")
@@ -75,7 +75,7 @@ public class UserController {
 			} else {
 				modelMap.addAttribute("msg", "Invalid username or password. Please try again");
 			}
-			return "login/login";
+			return "redirect:/showLogin";
 	}
 	
 	@RequestMapping("/showProfile")
@@ -99,7 +99,7 @@ public class UserController {
 		User updateUser = profileService.updateProfile(user, user1);
 		modelMap.addAttribute("userDetails", updateUser);
 
-		return "profile/showProfile";
+		return "redirect:/showProfile";
 	}
 	
 	@RequestMapping("/showDeleteProfile")
@@ -110,6 +110,7 @@ public class UserController {
 	@RequestMapping("/deleteProfile")
 	public String deleteProfile() {
 		User user = profileService.fetchUser();
+		SecurityContextHolder.getContext().setAuthentication(null);
 		userRepository.deleteById(user.getId());
 		return "profile/deletedSuccessfully";
 	}

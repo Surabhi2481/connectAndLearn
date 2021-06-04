@@ -77,8 +77,6 @@ public class UserController {
 		boolean loginResponse = securityService.login(email, password);
 		if (loginResponse) {
 			return "redirect:/showDashboard";
-		} else {
-			modelMap.addAttribute("msg", "Invalid username or password. Please try again");
 		}
 		return "redirect:/showLogin?error=true";
 	}

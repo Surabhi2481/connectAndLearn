@@ -50,6 +50,17 @@ h2 {
     color: #6CC8CC !important;
     background-color: #fff !important;
   }
+    .neomorphism{
+  	width: 85%;
+  	margin: 0 auto;
+  	border-radius: 16px;
+	background: #ffffff;
+	box-shadow:  10px 10px 21px #8a8a8a, 
+             -10px -10px 21px #ffffff;
+    font-family: Montserrat, sans-serif;
+    padding: 30px;
+    padding-top: 50px;
+  } 
 </style>
 <title>User Login</title>
 </head>
@@ -60,6 +71,7 @@ h2 {
 </div>
 
 <h2 class="text-center">Login</h2><br />
+<div class="neomorphism">
 <form class="form-horizontal" action="performLogin" method="post">
 <div class="form-group">
   <label class="col-md-4 control-label">E-Mail</label>  
@@ -87,6 +99,8 @@ h2 {
 </div>
 ${msg}
 </form>
+</div>
+<br />
 <div class="loginfooter">
 	<a href="showReg">Not a member? Click here to register.</a>
 </div>

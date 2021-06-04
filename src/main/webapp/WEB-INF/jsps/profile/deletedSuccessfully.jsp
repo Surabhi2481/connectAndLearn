@@ -41,7 +41,7 @@
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
-  border: 1px solid #f4511e;
+  border: 1px solid #6CC8CC;
   display: inline-block;
   width: 100%;
   height: 100%;

@@ -12,7 +12,7 @@
 <style>
 .navbar {
     margin-bottom: 0;
-    background-color: #f4511e;
+    background-color: #6CC8CC;
     z-index: 9999;
     border: 0;
     font-size: 12px !important;
@@ -25,7 +25,7 @@
     color: #fff !important;
   }
   .navbar-nav li a:hover, .navbar-nav li.active a {
-    color: #f4511e !important;
+    color: #6CC8CC !important;
     background-color: #fff !important;
   }
   .navbar-default .navbar-toggle {
@@ -41,7 +41,7 @@
 	background: #ffffff;
 	box-shadow:  10px 10px 21px #8a8a8a, 
              -10px -10px 21px #ffffff;
-    border: 1px solid #f4511e;
+    border: 1px solid #6CC8CC;
     font-size: 16px !important;
     line-height: 1.42857143 !important;
     letter-spacing: 4px;
@@ -62,7 +62,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="showDashboard">Learn-A-Hobby</a>
+      <a class="navbar-brand" href="showDashboard">Connect-And-Learn</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
@@ -72,7 +72,7 @@
     </div>
   </div>
 </nav>
-<h2 class="pageheading">Instructor's contact details:-</h2><hr />
-<p class="contactdetails">${instructorContactDetails}</p>
+<h2 class="successmessage">Enrollment Successful</h2>
+<a href="showDashboard">back to home</a>
 </body>
 </html>

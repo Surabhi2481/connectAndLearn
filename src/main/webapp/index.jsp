@@ -80,7 +80,7 @@
 		<h1>Connect-And-Learn</h1>
 		<p>Learn or Teach your fav skill !</p>
 	</div><br />
-	<p class="description">
+	<p class="description text-center">
 		Everyone is good at something. Be it playing an instrument, cooking
 		your favorite dish, gardening, playing computer games, coding,
 		origami, art and everything else that you can think of!<br /> <strong>Connect-And-Learn</strong>

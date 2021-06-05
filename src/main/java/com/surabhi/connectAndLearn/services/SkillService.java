@@ -11,5 +11,7 @@ public interface SkillService {
 	List<String> fetchMySkills(Long id);
 
 	public Skill addCourse(String name, String description, Float fee, Long instructorId);
+	
+	public Skill updateCourse(Skill course);
 
 }

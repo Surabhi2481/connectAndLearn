@@ -26,12 +26,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 public class SkillController {
 	
 	@Autowired
-	SkillRepository skillRepository;
-	
-	@Autowired
-	UserRepository userRepository;
-	
-	@Autowired
 	ProfileService profileService;
 	
 	@Autowired
@@ -42,7 +36,7 @@ public class SkillController {
 	@RequestMapping("/showSkillDetails")
 	public String showSkillDetails(@RequestParam("skillName") String skillName, ModelMap modelMap) {
 		User user = profileService.fetchUser();
-		List<Skill> allSkills = skillRepository.findAllByName(skillName);
+		List<Skill> allSkills = skillService.findAllSkillsByName(skillName);
 		for(Skill s : allSkills)
 			LOGGER.info(s.toString());
 		modelMap.addAttribute("allSkills", allSkills);
@@ -86,7 +80,7 @@ public class SkillController {
 	@RequestMapping("/showCourses")
 	public String showCourses(ModelMap modelMap) {
 		User user = profileService.fetchUser();
-		List<Skill> myCourses = skillRepository.findAllByInstructorId(user.getId());
+		List<Skill> myCourses = skillService.findAllSkillsByInstructorId(user.getId());
 		modelMap.addAttribute("myCourses", myCourses);
 		return "skill/myCourses";
 	}
@@ -94,7 +88,7 @@ public class SkillController {
 	@RequestMapping(value = "/editMyCourse")
 	public String editMyCourse(@RequestParam("courseId") Long skillId, ModelMap modelMap) {
 		User user = profileService.fetchUser();
-		Skill course = skillRepository.findById(skillId).get();
+		Skill course = skillService.findSkillById(skillId);
 		if(course.getInstructorId() == user.getId()) {
 			modelMap.addAttribute("course", course);
 			return "skill/editMyCourse";			
@@ -112,9 +106,9 @@ public class SkillController {
 	@RequestMapping(value = "/deleteMyCourse")
 	public String deleteMyCourse(@RequestParam("courseId") Long skillId, ModelMap modelMap) {
 		User user = profileService.fetchUser();
-		Skill course = skillRepository.findById(skillId).get();
+		Skill course = skillService.findSkillById(skillId);
 		if(course.getInstructorId() == user.getId()) {
-			skillRepository.deleteById(skillId);		
+			skillService.deleteSkillById(skillId);		
 		}
 		return "redirect:/showCourses";
 	}

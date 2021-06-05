@@ -107,7 +107,7 @@ $( function() {
 <form class="form-horizontal" action="showSkillDetails" method="post">
 
 <div class="form-group">
-  <label class="col-md-4 control-label">Search a hobby</label>  
+  <label class="col-md-4 control-label">Search a skill</label>  
   <div class="col-md-4 inputGroupContainer">
   <div class="input-group">
   <input class="form-control" placeholder="Search Using Skill Name" type="text" id="hint" name="skillName"/>

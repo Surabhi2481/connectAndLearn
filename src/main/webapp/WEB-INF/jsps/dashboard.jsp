@@ -245,6 +245,7 @@
   font-size: 17px;
   border: 1px solid #6CC8CC;
   align-items: stretch;
+  flex-grow: 1;
   }
   .utilityoptions a:hover{
     color: #6CC8CC !important;

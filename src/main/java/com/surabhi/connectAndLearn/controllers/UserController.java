@@ -9,8 +9,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -62,9 +62,11 @@ public class UserController {
 	public String register(@ModelAttribute("user") User user) {
 		user.setPassword(encoder.encode(user.getPassword()));
 		userRepository.save(user);
+		//profileService.saveUser(user);
 		securityService.assignRoleToUser(user);
 		return "redirect:/showLogin";
 	}
+	
 	
 	@RequestMapping("/showLogin")
 	public String showLoginPage() {
@@ -115,7 +117,6 @@ public class UserController {
 		User user = profileService.fetchUser();
 		User updateUser = profileService.updateProfile(user, user1);
 		modelMap.addAttribute("userDetails", updateUser);
-
 		return "redirect:/showProfile";
 	}
 	
@@ -129,6 +130,7 @@ public class UserController {
 		User user = profileService.fetchUser();
 		SecurityContextHolder.getContext().setAuthentication(null);
 		userRepository.deleteById(user.getId());
+		//profileService.deleteUserById(user.getId());
 		return "profile/deletedSuccessfully";
 	}
 	
@@ -153,3 +155,4 @@ public class UserController {
 	}
 
 }
+

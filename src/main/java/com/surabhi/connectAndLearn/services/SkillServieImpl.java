@@ -51,6 +51,9 @@ public class SkillServieImpl implements SkillService {
 	
 	@Override
 	public Skill addCourse(String name, String description, Float fee, Long instructorId) {
+		if(fee == null) {
+			fee = 0.00f;
+		}
 		User instructor = userRepository.findById(instructorId).get();
 		Skill skill = new Skill();
 		skill.setName(name);

@@ -106,7 +106,7 @@
 	<th>Trainee Name</th>
 	<th>Trainee Email</th>
 	<th>Trainee Phone Number</th>
-	<th>acquired</th>
+	<th>Acquired</th>
 </tr>
 <c:forEach items="${trainees}" var="trainee">
     <tr>

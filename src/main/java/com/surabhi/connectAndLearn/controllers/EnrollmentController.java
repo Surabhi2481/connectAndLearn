@@ -20,16 +20,11 @@ import com.surabhi.connectAndLearn.repos.SkillRepository;
 import com.surabhi.connectAndLearn.repos.UserRepository;
 import com.surabhi.connectAndLearn.services.EnrollService;
 import com.surabhi.connectAndLearn.services.ProfileService;
+import com.surabhi.connectAndLearn.services.SkillService;
 import com.surabhi.connectAndLearn.services.TrainingService;
 
 @Controller
 public class EnrollmentController {
-
-	@Autowired
-	SkillRepository skillRepository;
-	
-	@Autowired
-	EnrollmentRepository enrollmentRepository;
 	
 	@Autowired
 	EnrollService enrollService;
@@ -38,24 +33,24 @@ public class EnrollmentController {
 	TrainingService trainingService;
 	
 	@Autowired
-	ProfileService profileService;
+	SkillService skillService;
 	
 	@Autowired
-	UserRepository userRepository;
-
+	ProfileService profileService;
+	
 	private static final Logger LOGGER = LoggerFactory.getLogger(EnrollmentController.class);
 
 	@RequestMapping("/showEnroll")
 	public String showEnroll(@RequestParam("skillId") Long skillId, ModelMap modelMap) {
 		User user = profileService.fetchUser();
-		Skill skill = skillRepository.findById(skillId).get();
+		Skill skill = skillService.findSkillById(skillId);
 		modelMap.addAttribute("skill", skill);
 		return "enrollment/showEnroll";
 	}
 	
 	@RequestMapping("/showCheckout")
 	public String showCheckout(@RequestParam("skillId") Long skillId, ModelMap modelMap) {
-		Skill skill = skillRepository.findById(skillId).get();
+		Skill skill = skillService.findSkillById(skillId);
 		if(skill.getFee() == 0.0) {
 			User user = profileService.fetchUser();
 			String paymentGateway = "No payment";
@@ -113,22 +108,23 @@ public class EnrollmentController {
 	
 	@RequestMapping("/showEnrollments")
 	public String showEnrollments(@RequestParam("userId") Long userId, ModelMap modelMap) {
-		List<Enrollment> enrollments = enrollmentRepository.findAllByUserId(userId);
+		User user = profileService.fetchUser();
+		List<Enrollment> enrollments = enrollService.findAllEnrollmentsByUserId(user.getId());
 		modelMap.addAttribute("enrollments", enrollments);
 		return "enrollment/enrollments";
 	}
 	
-	@RequestMapping("/contactInstructor")
+	@RequestMapping(value = "/contactInstructor", method = RequestMethod.POST)
 	public String contactInstructor(@RequestParam("enrollmentId") Long enrollmentId, ModelMap modelMap) {
 		String instructorContact = enrollService.fetchInstructorContact(enrollmentId);
 		modelMap.addAttribute("instructorContactDetails", instructorContact);
 		return "enrollment/contactInstructor";
 	}
 	
-	@RequestMapping("/showRateCourse")
+	@RequestMapping(value = "/showRateCourse", method = RequestMethod.POST)
 	public String rateCourse(@RequestParam("enrollmentId") Long enrollmentId, ModelMap modelMap) {
-		Enrollment enrollment = enrollmentRepository.findById(enrollmentId).get();
-		Skill skill = skillRepository.findById(enrollment.getSkillId()).get();
+		Enrollment enrollment = enrollService.findEnrollmentById(enrollmentId);
+		Skill skill = skillService.findSkillById(enrollment.getSkillId());
 		modelMap.addAttribute("course", skill);
 		modelMap.addAttribute("enrollmentId", enrollmentId);
 		return "enrollment/rateCourse";

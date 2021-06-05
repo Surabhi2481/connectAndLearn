@@ -1,6 +1,8 @@
 package com.surabhi.connectAndLearn.services;
 
 import java.util.Date;
+import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -66,9 +68,27 @@ public class EnrollServiceImpl implements EnrollService {
 	public String fetchInstructorContact(Long enrollmentId) {
 		Enrollment enrollment = enrollmentRepository.findById(enrollmentId).get();
 		Long instructorId = enrollment.getInstructorId();
-		User instructor = userRepository.findById(instructorId).get();
-		String instructorEmail = instructor.getEmail();
-		return instructorEmail;
+//		User instructor = userRepository.findById(instructorId).get();
+		Optional<User> optionalUser = userRepository.findById(instructorId);
+		if(optionalUser.isPresent()) {
+			User instructor = optionalUser.get();
+			String instructorEmail = instructor.getEmail();
+			return instructorEmail;
+		}
+		else {
+			return null;
+		}
+	}
+
+	@Override
+	public List<Enrollment> findAllEnrollmentsByUserId(Long userId) {
+		return enrollmentRepository.findAllByUserId(userId);
+	}
+
+	@Override
+	public Enrollment findEnrollmentById(Long enrollmentId) {
+		return enrollmentRepository.findById(enrollmentId).get();
+		
 	}
 
 }

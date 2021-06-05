@@ -31,15 +31,6 @@ import com.surabhi.connectAndLearn.services.SkillService;
 public class UserController {
 	
 	@Autowired
-	UserRepository userRepository;
-	
-	@Autowired
-	SkillRepository skillRepository;
-	
-	@Autowired
-	EnrollmentRepository enrollmentRepository;
-	
-	@Autowired
 	ProfileService profileService;
 	
 	@Autowired
@@ -61,8 +52,7 @@ public class UserController {
 	@RequestMapping(value = "/registerUser", method = RequestMethod.POST)
 	public String register(@ModelAttribute("user") User user) {
 		user.setPassword(encoder.encode(user.getPassword()));
-		userRepository.save(user);
-		//profileService.saveUser(user);
+		profileService.saveUser(user);
 		securityService.assignRoleToUser(user);
 		return "redirect:/showLogin";
 	}
@@ -129,15 +119,14 @@ public class UserController {
 	public String deleteProfile() {
 		User user = profileService.fetchUser();
 		SecurityContextHolder.getContext().setAuthentication(null);
-		userRepository.deleteById(user.getId());
-		//profileService.deleteUserById(user.getId());
+		profileService.deleteUserById(user.getId());
 		return "profile/deletedSuccessfully";
 	}
 	
 	@RequestMapping("/showDashboard")
 	public String showDashboard(ModelMap modelMap) {
 		User user = profileService.fetchUser();
-		List<String> trendingSkills = skillRepository.fetchTrendingSkills();
+		List<String> trendingSkills = skillService.fetchTrendingSkills();
 		modelMap.addAttribute("trendingSkills", trendingSkills);
 		List<String> mySkills = skillService.fetchMySkills(user.getId());
 		modelMap.addAttribute("mySkills", mySkills);

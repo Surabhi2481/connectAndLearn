@@ -3,6 +3,7 @@ package com.surabhi.connectAndLearn.services;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,6 +70,9 @@ public class SkillServieImpl implements SkillService {
 		updatedCourse.setName(course.getName());
 		updatedCourse.setDescription(course.getDescription());
 		updatedCourse.setFee(course.getFee());
+		if(course.getFee() == null) {
+			updatedCourse.setFee(0.00f);
+		}
 		return skillRepository.save(updatedCourse);
 	}
 	
@@ -85,6 +89,37 @@ public class SkillServieImpl implements SkillService {
 		skill.setRating(rating);
 		skill.setUsersRated(skill.getUsersRated() + 1);
 		skillRepository.save(skill);
+	}
+	
+	@Override
+	public List<String> fetchTrendingSkills() {
+		return skillRepository.fetchTrendingSkills();
+	}
+
+	@Override
+	public List<Skill> findAllSkillsByName(String skillName) {
+		return skillRepository.findAllByName(skillName);
+	}
+
+	@Override
+	public List<Skill> findAllSkillsByInstructorId(Long instructorId) {
+		return skillRepository.findAllByInstructorId(instructorId);
+	}
+
+	@Override
+	public Skill findSkillById(Long skillId) {	
+		Optional<Skill> optionalSkill = skillRepository.findById(skillId);
+		if(optionalSkill.isPresent()) {
+			return skillRepository.findById(skillId).get();			
+		}
+		else {
+			return null;
+		}		
+	}
+
+	@Override
+	public void deleteSkillById(Long skillId) {
+		skillRepository.deleteById(skillId);
 	}
 
 }

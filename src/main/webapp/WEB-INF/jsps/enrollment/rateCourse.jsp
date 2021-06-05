@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page isELIgnored="false"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -82,11 +84,23 @@ label.star:before {
 .ratingsDiv{
 	text-align: center;
 }
-.submitRating{
-	
+.notFound{
+	 border-radius: 2px;
+	background: #ffffff;
+	box-shadow:  10px 10px 21px #8a8a8a, 
+             -10px -10px 21px #ffffff;
+    border: 1px solid #f4511e;
+    font-size: 16px !important;
+    line-height: 1.42857143 !important;
+    letter-spacing: 4px;
+    font-family: Montserrat, sans-serif;
+    width: 80%;
+    margin: 0 auto;
+    padding: 16px;
+    padding-top: 100px;	
 }
 </style>
-<title>Insert title here</title>
+<title>Rate Course</title>
 </head>
 <body>
 <nav class="navbar navbar-default navbar-fixed-top">
@@ -107,7 +121,13 @@ label.star:before {
     </div>
   </div>
 </nav>
-<div class="neomorphism">
+
+<c:choose>
+    <c:when test="${empty course}">
+         <p class="notFound">Cannot rate the course as it was deleted.</p>
+    </c:when>
+    <c:otherwise>
+        <div class="neomorphism">
 <h2>Rate Course</h2><hr />
 <table class="table courseTable">
 <tr>
@@ -151,5 +171,7 @@ label.star:before {
 </div>
 </div>
 </div>
+    </c:otherwise>
+</c:choose>
 </body>
 </html>

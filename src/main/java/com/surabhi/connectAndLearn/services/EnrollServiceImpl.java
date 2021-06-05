@@ -48,6 +48,7 @@ public class EnrollServiceImpl implements EnrollService {
 			enrollment.setDateEnrolled(new Date());			
 			enrollment.setPaymentDetails(paymentDetails);
 			enrollment.setAcquired(false);
+			enrollment.setIsRated(false);
 			enrollmentRepository.save(enrollment);
 			skillRepository.save(skill);
 			//userRepository.save(user);

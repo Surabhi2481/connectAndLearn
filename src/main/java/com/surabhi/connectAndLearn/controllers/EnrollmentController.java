@@ -124,4 +124,13 @@ public class EnrollmentController {
 		modelMap.addAttribute("instructorContactDetails", instructorContact);
 		return "enrollment/contactInstructor";
 	}
+	
+	@RequestMapping("/showRateCourse")
+	public String rateCourse(@RequestParam("enrollmentId") Long enrollmentId, ModelMap modelMap) {
+		Enrollment enrollment = enrollmentRepository.findById(enrollmentId).get();
+		Skill skill = skillRepository.findById(enrollment.getSkillId()).get();
+		modelMap.addAttribute("course", skill);
+		modelMap.addAttribute("enrollmentId", enrollmentId);
+		return "enrollment/rateCourse";
+	}
 }

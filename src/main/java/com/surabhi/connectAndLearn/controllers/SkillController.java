@@ -113,5 +113,12 @@ public class SkillController {
 		}
 		return "redirect:/showCourses";
 	}
+	
+	@RequestMapping(value = "/rateCourse", method = RequestMethod.POST)
+	public String rateCourse(@RequestParam("star") Long ratingStar, @RequestParam("skillId") Long skillId,
+			@RequestParam("enrollmentId") Long enrollmentId) {
+		skillService.rateCourse(ratingStar, skillId, enrollmentId);
+		return "redirect:/showEnrollments";
+	}
 
 }
